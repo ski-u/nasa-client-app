@@ -6,17 +6,17 @@ struct NavigationLinkLabel: View {
     let icon: Image
 
     var body: some View {
-        HStack {
+        Label {
+            text
+        } icon: {
             Image(systemName: "square.fill")
-                .font(.largeTitle)
+                .font(.title2)
                 .foregroundColor(color)
                 .overlay {
                     icon
+                        .font(.footnote)
                         .foregroundColor(.white)
                 }
-                .padding(.trailing, 8)
-
-            text
         }
     }
 }
