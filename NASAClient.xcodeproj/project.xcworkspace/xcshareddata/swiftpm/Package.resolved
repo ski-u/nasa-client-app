@@ -1,5 +1,5 @@
 {
-  "originHash" : "ad07befb2ec5b67014cb4abb234212d10031c80fa5fd53fbe3214151924bea35",
+  "originHash" : "6a91abd7267148ed9a287bf19885b8ec5d65640c0faafffb39f5c2e6ceb57a10",
   "pins" : [
     {
       "identity" : "combine-schedulers",
@@ -105,8 +105,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/konomae/swift-local-date",
       "state" : {
-        "revision" : "fc9ec0a6ba468b92321519cb113d320cfe9b2540",
-        "version" : "0.4.1"
+        "revision" : "93ec70c8232ef1a2ac235eec664544d0afc03a5f",
+        "version" : "0.5.0"
       }
     },
     {
