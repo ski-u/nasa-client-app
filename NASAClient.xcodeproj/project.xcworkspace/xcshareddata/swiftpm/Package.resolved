@@ -1,5 +1,5 @@
 {
-  "originHash" : "9fd9e051c5fd5dd9c07159857e6bc4ce2c94ea4aa1005c0a075395aeb84fb448",
+  "originHash" : "fcdee34e7e83bde3b0ee381d5ad66dda91e671a317ddf1e3ef9266c8134dfd65",
   "pins" : [
     {
       "identity" : "combine-schedulers",
@@ -87,8 +87,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/pointfreeco/swift-dependencies.git",
       "state" : {
-        "revision" : "121a428c505c01c4ce02d5ada1c8fc3da93afce9",
-        "version" : "1.8.0"
+        "revision" : "ec2862d1364536fc22ec56a3094e7a034bbc7da8",
+        "version" : "1.8.1"
       }
     },
     {
