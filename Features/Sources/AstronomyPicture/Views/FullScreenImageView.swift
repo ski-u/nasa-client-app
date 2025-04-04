@@ -4,7 +4,7 @@ struct FullScreenImageView: View {
     let closeButtonTapped: () -> Void
     let hdImageURL: URL?
     let image: Image
-
+    
     var body: some View {
         ZStack {
             if let hdImageURL {
@@ -30,18 +30,18 @@ struct FullScreenImageView: View {
                     .resizable()
                     .aspectRatio(contentMode: .fit)
             }
-
+            
             VStack {
                 HStack {
                     Spacer()
-
+                    
                     Button(action: closeButtonTapped) {
                         Image(systemName: "xmark")
                             .foregroundColor(.primary)
                     }
                     .padding()
                 }
-
+                
                 Spacer()
             }
         }
