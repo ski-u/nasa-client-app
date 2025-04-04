@@ -5,13 +5,13 @@ import SwiftUI
 
 public struct TodayView: View {
     @Bindable var store: StoreOf<TodayReducer>
-
+    
     @State private var isPresentedFullScreenImage = false
-
+    
     public init(store: StoreOf<TodayReducer>) {
         self.store = store
     }
-
+    
     public var body: some View {
         NavigationStack(path: $store.scope(state: \.path, action: \.path)) {
             List {
@@ -51,7 +51,7 @@ public struct TodayView: View {
             }
         }
     }
-
+    
     private func errorRetryView(error: TextState) -> some View {
         Section(
             header: ErrorRetryView(

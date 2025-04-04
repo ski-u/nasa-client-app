@@ -9,14 +9,14 @@ public struct TodayReducer: Sendable {
     public enum Path {
         case astronomyPictureList(AstronomyPictureList)
     }
-
+    
     @ObservableState
     public struct State: Equatable {
         var error: TextState?
         var isLoading = false
         var path: StackState<Path.State>
         var picture: AstronomyPicture?
-
+        
         public init(
             error: TextState? = nil,
             isLoading: Bool = false,
@@ -29,19 +29,19 @@ public struct TodayReducer: Sendable {
             self.picture = picture
         }
     }
-
+    
     public enum Action {
         case fetch
         case path(StackActionOf<Path>)
         case response(Result<AstronomyPicture, any Error>)
     }
-
+    
     public init() {}
-
+    
     @Dependency(\.apiClient) private var client
-
+    
     private enum CancelID { case fetch }
-
+    
     public var body: some ReducerOf<Self> {
         Reduce { state, action in
             switch action {

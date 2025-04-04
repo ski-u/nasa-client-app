@@ -8,11 +8,11 @@ public struct APIKeySetting {
     public struct State: Equatable {
         var apiKeyInput: APIKey
         var initialAPIKey: APIKey
-
+        
         var isEdited: Bool {
             apiKeyInput != initialAPIKey
         }
-
+        
         public init(
             apiKeyInput: APIKey = .init(rawValue: "")
         ) {
@@ -20,23 +20,23 @@ public struct APIKeySetting {
             initialAPIKey = apiKeyInput
         }
     }
-
+    
     public enum Action: Equatable {
         case delegate(Delegate)
         case onAppear
         case setAPIKeyInput(String)
         case updateButtonTapped
-
+        
         @CasePathable
         public enum Delegate {
             case updated
         }
     }
-
+    
     @Dependency(\.apiKeyClient) private var apiKeyClient
-
+    
     public init() {}
-
+    
     public func reduce(into state: inout State, action: Action) -> Effect<Action> {
         switch action {
         case .delegate:

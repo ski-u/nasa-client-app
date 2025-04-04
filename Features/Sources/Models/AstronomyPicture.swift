@@ -9,7 +9,7 @@ public struct AstronomyPicture: Equatable, Sendable {
     public var mediaType: MediaType
     public var title: String
     public var url: URL?
-
+    
     public init(
         copyright: String? = nil,
         date: LocalDate,
@@ -27,7 +27,7 @@ public struct AstronomyPicture: Equatable, Sendable {
         self.title = title
         self.url = url
     }
-
+    
     public init(payload: Payload) {
         self.init(
             copyright: payload.copyright,
@@ -50,7 +50,7 @@ extension AstronomyPicture {
         public var mediaType: String
         public var title: String
         public var url: String
-
+        
         public init(
             copyright: String? = nil,
             date: String,
@@ -68,7 +68,7 @@ extension AstronomyPicture {
             self.title = title
             self.url = url
         }
-
+        
         enum CodingKeys: String, CodingKey {
             case copyright
             case date
