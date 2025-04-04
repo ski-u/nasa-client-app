@@ -8,27 +8,27 @@ public struct Settings {
     public enum Path {
         case apiKeySetting(APIKeySetting)
     }
-    
+
     @ObservableState
     public struct State: Equatable {
         var apiKey: APIKey
         var path = StackState<Path.State>()
-        
+
         public init(
             apiKey: APIKey = .init(rawValue: "")
         ) {
             self.apiKey = apiKey
         }
     }
-    
+
     public enum Action {
         case onAppear
         case path(StackActionOf<Path>)
         case popToRoot
     }
-    
+
     @Dependency(\.apiKeyClient) private var apiKeyClient
-    
+
     public var body: some ReducerOf<Self> {
         Reduce { state, action in
             switch action {
@@ -54,6 +54,6 @@ public struct Settings {
         }
         .forEach(\.path, action: \.path)
     }
-    
+
     public init() {}
 }

@@ -6,15 +6,15 @@ import SwiftUI
 
 public struct AppView: View {
     var store: StoreOf<AppReducer>
-    
+
     @State private var sidebarItem: SidebarItem? = .today
-    
+
     @Shared(.appStorage("colorScheme")) var userColorScheme = UserColorScheme.system
-    
+
     public init(store: StoreOf<AppReducer>) {
         self.store = store
     }
-    
+
     public var body: some View {
         Group {
             switch UIDevice.current.userInterfaceIdiom {
@@ -26,7 +26,7 @@ public struct AppView: View {
         }
         .preferredColorScheme(userColorScheme.colorScheme)
     }
-    
+
     private var tabView: some View {
         TabView {
             NavigationStack {
@@ -38,7 +38,7 @@ public struct AppView: View {
                     Text("Pictures")
                 }
             }
-            
+
             SettingsView(store: store.scope(state: \.settings, action: \.settings))
                 .tabItem {
                     VStack {
@@ -48,7 +48,7 @@ public struct AppView: View {
                 }
         }
     }
-    
+
     private var sidebarView: some View {
         NavigationSplitView {
             List(SidebarItem.allCases, id: \.self, selection: $sidebarItem) { item in
@@ -69,11 +69,11 @@ public struct AppView: View {
             }
         }
     }
-    
+
     private enum SidebarItem: CaseIterable {
         case today
         case setting
-        
+
         var displayName: String {
             switch self {
             case .today:
@@ -82,7 +82,7 @@ public struct AppView: View {
                 "Settings"
             }
         }
-        
+
         var icon: Image {
             switch self {
             case .today:

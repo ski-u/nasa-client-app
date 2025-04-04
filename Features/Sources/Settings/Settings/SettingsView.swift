@@ -5,11 +5,11 @@ import SwiftUI
 
 public struct SettingsView: View {
     @Bindable var store: StoreOf<Settings>
-    
+
     public init(store: StoreOf<Settings>) {
         self.store = store
     }
-    
+
     public var body: some View {
         NavigationStack(path: $store.scope(state: \.path, action: \.path)) {
             List {
@@ -25,14 +25,14 @@ public struct SettingsView: View {
                                 text: Text("API Key"),
                                 icon: Image(systemName: "key.fill")
                             )
-                            
+
                             Spacer()
-                            
+
                             Text(store.apiKey.masked ?? "None")
                                 .foregroundStyle(Color.secondary)
                         }
                     }
-                    
+
                     NavigationLink {
                         AppearanceView()
                     } label: {
@@ -43,7 +43,7 @@ public struct SettingsView: View {
                         )
                     }
                 }
-                
+
                 Section {
                     NavigationLink {
                         LicenseListView()

@@ -9,7 +9,7 @@ import Models
 extension APIClient: DependencyKey {
     private static let apiKeyClient = APIKeyClient.liveValue
     private static let baseURL = URL(string: "https://api.nasa.gov")!
-    
+
     // TODO: API request abstraction
     public static var liveValue: Self {
         .init(
@@ -23,9 +23,9 @@ extension APIClient: DependencyKey {
                         value: LocalDate().addingMonths(-1).description
                     ),
                 ]
-                
+
                 let (data, _) = try await URLSession.shared.data(from: urlComponents.url!)
-                
+
                 return try JSONDecoder()
                     .decode([AstronomyPicture.Payload].self, from: data)
                     .map(AstronomyPicture.init)
@@ -37,9 +37,9 @@ extension APIClient: DependencyKey {
                 urlComponents.queryItems = [
                     URLQueryItem(name: "api_key", value: apiKeyClient.getKey()?.rawValue)
                 ]
-                
+
                 let (data, _) = try await URLSession.shared.data(from: urlComponents.url!)
-                
+
                 return try AstronomyPicture(
                     payload: JSONDecoder().decode(AstronomyPicture.Payload.self, from: data)
                 )

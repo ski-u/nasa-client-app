@@ -10,7 +10,7 @@ public struct AstronomyPictureList: Sendable {
         var isLoaded: Bool
         var isLoading: Bool
         var pictures: [AstronomyPicture]
-        
+
         public init(
             error: TextState? = nil,
             isLoaded: Bool = false,
@@ -23,25 +23,25 @@ public struct AstronomyPictureList: Sendable {
             self.pictures = pictures
         }
     }
-    
+
     public enum Action {
         case fetch
         case response(Result<[AstronomyPicture], any Error>)
     }
-    
+
     public init() {}
-    
+
     @Dependency(\.apiClient) private var client
-    
+
     private enum CancelID { case fetch }
-    
+
     public func reduce(into state: inout State, action: Action) -> Effect<Action> {
         switch action {
         case .fetch:
             if state.isLoaded {
                 return .none
             }
-            
+
             state.error = nil
             state.isLoading = true
             return .run { send in
