@@ -33,6 +33,7 @@ public struct TodayView: View {
                     ) {
                         Image(systemName: "calendar")
                     }
+                    .accessibilityLabel("History")
                 }
             }
             .refreshable {
