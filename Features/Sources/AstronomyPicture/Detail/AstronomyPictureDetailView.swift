@@ -8,75 +8,73 @@ struct AstronomyPictureDetailView: View {
     @State private var isPresentedFullScreenImage = false
     
     var body: some View {
-        Section(
-            header: Group {
-                switch picture.mediaType {
-                case .image:
-                    AsyncImage(url: picture.url) { phase in
-                        switch phase {
-                        case .empty:
-                            ProgressView()
-                                .frame(maxWidth: .infinity)
-                        case let .success(image):
-                            image
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .onTapGesture {
-                                    isPresentedFullScreenImage = true
-                                }
-                                .fullScreenCover(isPresented: $isPresentedFullScreenImage) {
-                                    FullScreenImageView(
-                                        closeButtonTapped: {
-                                            isPresentedFullScreenImage = false
-                                        },
-                                        hdImageURL: picture.hdURL,
-                                        image: image
-                                    )
-                                }
-                        case let .failure(error):
-                            VStack {
-                                Text("Failed to open:")
-                                Link(picture.url!.absoluteString, destination: picture.url!)
-                                Text(error.localizedDescription)
-                            }
-                            .font(.subheadline)
-                            .frame(maxWidth: .infinity)
-                            .textCase(nil)
-                        @unknown default:
-                            Text("Unexpected error occurred.")
-                        }
+        ScrollView {
+            VStack(spacing: 16) {
+                media()
+                
+                VStack(alignment: .leading, spacing: 8) {
+                    Text(picture.title)
+                        .font(.title2.bold())
+                    
+                    Text(picture.explanation)
+                    
+                    if let copyright = picture.copyright {
+                        Text("copyright: \(copyright)")
+                            .font(.caption)
+                            .foregroundStyle(Color.secondary)
                     }
-                case .video:
-                    WebView(url: picture.url!)
+                }
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding(.horizontal)
+            }
+        }
+    }
+    
+    @ViewBuilder
+    private func media() -> some View {
+        switch picture.mediaType {
+        case .image:
+            AsyncImage(url: picture.url) { phase in
+                switch phase {
+                case .empty:
+                    ProgressView()
+                        .frame(maxWidth: .infinity)
+                case let .success(image):
+                    image
+                        .resizable()
                         .aspectRatio(contentMode: .fit)
-                case .other:
-                    EmptyView()
-                case .unknown:
+                        .onTapGesture {
+                            isPresentedFullScreenImage = true
+                        }
+                        .fullScreenCover(isPresented: $isPresentedFullScreenImage) {
+                            FullScreenImageView(
+                                closeButtonTapped: {
+                                    isPresentedFullScreenImage = false
+                                },
+                                hdImageURL: picture.hdURL,
+                                image: image
+                            )
+                        }
+                case let .failure(error):
+                    VStack {
+                        Text("Failed to open:")
+                        Link(picture.url!.absoluteString, destination: picture.url!)
+                        Text(error.localizedDescription)
+                    }
+                    .font(.subheadline)
+                    .frame(maxWidth: .infinity)
+                    .textCase(nil)
+                @unknown default:
                     Text("Unexpected error occurred.")
                 }
             }
-        ) {}
-        
-        Section(
-            header: Text("Title")
-                .textCase(nil)
-        ) {
-            Text(picture.title)
-                .font(.body.bold())
-        }
-        
-        Section(
-            header: Text("Explanation")
-                .textCase(nil)
-        ) {
-            Text(picture.explanation)
-        }
-        
-        if let copyright = picture.copyright {
-            Section(
-                header: Text("copyright: \(copyright)")
-                    .textCase(nil)
-            ) {}
+        case .video:
+            WebView(url: picture.url!)
+                .aspectRatio(contentMode: .fit)
+        case .other:
+            EmptyView()
+        case .unknown:
+            Text("Unexpected error occurred.")
         }
     }
 }

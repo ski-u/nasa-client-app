@@ -27,11 +27,9 @@ struct AstronomyPictureListView: View {
             id: \.date.description
         ) { picture in
             NavigationLink {
-                List {
-                    AstronomyPictureDetailView(picture: picture)
-                }
-                .navigationTitle(.init(picture.date.description))
-                .navigationBarTitleDisplayMode(.inline)
+                AstronomyPictureDetailView(picture: picture)
+                    .navigationTitle(.init(picture.date.description))
+                    .navigationBarTitleDisplayMode(.inline)
             } label: {
                 VStack(alignment: .leading) {
                     Text(picture.date.description)

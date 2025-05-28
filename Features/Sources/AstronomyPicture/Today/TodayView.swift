@@ -14,7 +14,7 @@ public struct TodayView: View {
     
     public var body: some View {
         NavigationStack(path: $store.scope(state: \.path, action: \.path)) {
-            List {
+            Group {
                 if let error = store.error {
                     errorRetryView(error: error)
                 } else if let picture = store.picture {
