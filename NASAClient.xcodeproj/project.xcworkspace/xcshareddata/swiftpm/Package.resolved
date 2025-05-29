@@ -1,5 +1,5 @@
 {
-  "originHash" : "0178f88f431b8129b7a81961670a11de2c5d4e990f218104bde26f3e060e274b",
+  "originHash" : "1ff89127315079b74dbf4fbd47b9ce48d7047c0815e5199e2825d01f36fb7f12",
   "pins" : [
     {
       "identity" : "combine-schedulers",
@@ -24,8 +24,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/cybozu/LicenseList.git",
       "state" : {
-        "revision" : "dc78bb16a82dc2c5a5fc4aa825f373fe7a06cf33",
-        "version" : "2.0.2"
+        "revision" : "0f83f934ee437461b87870b62871108b882a143a",
+        "version" : "2.0.3"
       }
     },
     {
