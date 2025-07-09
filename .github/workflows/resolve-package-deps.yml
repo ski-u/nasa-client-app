@@ -5,6 +5,9 @@ on:
     paths:
       - "Features/Package.swift"
 
+env:
+  DEVELOPER_DIR: /Applications/Xcode_16.4.app/Contents/Developer
+
 jobs:
   resolve-package-deps:
     runs-on: macos-15
