@@ -19,28 +19,30 @@ public struct SettingsView: View {
                             APIKeySetting.State()
                         )
                     ) {
-                        HStack {
-                            NavigationLinkLabel(
-                                color: .yellow,
-                                text: Text("API Key"),
-                                icon: Image(systemName: "key.fill")
-                            )
-                            
-                            Spacer()
-                            
-                            Text(store.apiKey.masked ?? "None")
-                                .foregroundStyle(Color.secondary)
+                        Label {
+                            HStack {
+                                Text("API Key")
+                                
+                                Spacer()
+                                
+                                Text(store.apiKey.masked ?? "None")
+                                    .foregroundStyle(Color.secondary)
+                            }
+                        } icon: {
+                            Image(systemName: "key.fill")
+                                .foregroundStyle(Color.yellow)
                         }
                     }
                     
                     NavigationLink {
                         AppearanceView()
                     } label: {
-                        NavigationLinkLabel(
-                            color: .cyan,
-                            text: Text("Appearance"),
-                            icon: Image(systemName: "circle.lefthalf.filled")
-                        )
+                        Label {
+                            Text("Appearance")
+                        } icon: {
+                            Image(systemName: "circle.lefthalf.filled")
+                                .foregroundStyle(Color.cyan)
+                        }
                     }
                 }
                 
@@ -50,11 +52,12 @@ public struct SettingsView: View {
                             .licenseViewStyle(.withRepositoryAnchorLink)
                             .navigationTitle(.init("Acknowledgement"))
                     } label: {
-                        NavigationLinkLabel(
-                            color: .gray,
-                            text: Text("Acknowledgement"),
-                            icon: Image(systemName: "wrench.and.screwdriver")
-                        )
+                        Label {
+                            Text("Acknowledgement")
+                        } icon: {
+                            Image(systemName: "wrench.and.screwdriver.fill")
+                                .foregroundColor(.gray)
+                        }
                     }
                 }
             }
