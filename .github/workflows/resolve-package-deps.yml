@@ -16,7 +16,7 @@ jobs:
       workflows: write
     steps:
       - uses: actions/checkout@v5
-      - name: Pull Remote Changes
+      - name: Resolve package dependencies
         run: xcodebuild -resolvePackageDependencies
       - uses: stefanzweifel/git-auto-commit-action@v6
         with:
