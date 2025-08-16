@@ -13,9 +13,10 @@ jobs:
     runs-on: macos-15
     permissions:
       contents: write
-      workflows: write
     steps:
       - uses: actions/checkout@v5
+        with:
+          ref: ${{ github.head_ref }}
       - name: Resolve package dependencies
         run: xcodebuild -resolvePackageDependencies
       - uses: stefanzweifel/git-auto-commit-action@v6
