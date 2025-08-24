@@ -11,6 +11,7 @@ env:
 jobs:
   resolve-package-deps:
     runs-on: macos-15
+    timeout-minutes: 5
     permissions:
       contents: write
     steps:
