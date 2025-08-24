@@ -44,7 +44,7 @@ let package = Package(
         .package(url: "https://github.com/cybozu/LicenseList.git", exact: "2.2.0"),
         .package(
             url: "https://github.com/pointfreeco/swift-composable-architecture.git",
-            from: "1.21.1"
+            from: "1.22.1"
         ),
         .package(url: "https://github.com/pointfreeco/swift-dependencies.git", from: "1.9.4"),
         .package(url: "https://github.com/kishikawakatsumi/KeychainAccess.git", from: "4.2.2"),
