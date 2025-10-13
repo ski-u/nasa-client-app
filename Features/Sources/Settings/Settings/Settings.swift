@@ -14,6 +14,9 @@ public struct Settings {
         var apiKey: APIKey
         var path = StackState<Path.State>()
         
+        @Shared(.appStorage("isTranslationEnabled")) var isTranslationEnabled = false
+        @Shared(.appStorage("colorScheme")) var userColorScheme = UserColorScheme.system
+        
         public init(
             apiKey: APIKey = .init(rawValue: "")
         ) {

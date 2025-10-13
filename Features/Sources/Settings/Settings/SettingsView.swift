@@ -38,7 +38,14 @@ public struct SettingsView: View {
                         AppearanceView()
                     } label: {
                         Label {
-                            Text("Appearance")
+                            HStack {
+                                Text("Appearance")
+                                
+                                Spacer()
+                                
+                                Text(store.userColorScheme.displayString)
+                                    .foregroundStyle(Color.secondary)
+                            }
                         } icon: {
                             Image(systemName: "circle.lefthalf.filled")
                                 .foregroundStyle(Color.green)
@@ -49,7 +56,14 @@ public struct SettingsView: View {
                         TranslationView()
                     } label: {
                         Label {
-                            Text("Machine Translation")
+                            HStack {
+                                Text("Machine Translation")
+                                
+                                Spacer()
+                                
+                                Text(store.isTranslationEnabled ? "On" : "Off")
+                                    .foregroundStyle(Color.secondary)
+                            }
                         } icon: {
                             Image(systemName: "translate")
                                 .foregroundStyle(Color.cyan)
