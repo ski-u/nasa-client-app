@@ -62,7 +62,8 @@ struct AstronomyPictureDetailView: View {
             }
         }
         .onAppear {
-            translationConfig = isTranslationEnabled
+            translationConfig =
+                isTranslationEnabled
                 ? .init(
                     source: .init(identifier: "en"),
                     target: .init(identifier: "ja"),
