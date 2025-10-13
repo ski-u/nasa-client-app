@@ -5,6 +5,7 @@ import PackageDescription
 
 let package = Package(
     name: "Features",
+    defaultLocalization: "en",
     platforms: [.iOS(.v18)],
     products: [
         .library(
@@ -121,7 +122,7 @@ let package = Package(
                 "APIKeyClient",
                 .product(name: "ComposableArchitecture", package: "swift-composable-architecture"),
                 .product(name: "LicenseList", package: "LicenseList"),
-            ]
+            ],
         ),
         .testTarget(
             name: "SettingsTests",

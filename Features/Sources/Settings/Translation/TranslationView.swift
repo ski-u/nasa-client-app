@@ -15,7 +15,7 @@ struct TranslationView: View {
                 }
             ) {
                 HStack {
-                    Text("On")
+                    Text("On", bundle: .module)
                         .foregroundStyle(Color.primary)
                     
                     Spacer()
@@ -34,7 +34,7 @@ struct TranslationView: View {
                 }
             ) {
                 HStack {
-                    Text("Off")
+                    Text("Off", bundle: .module)
                         .foregroundStyle(Color.primary)
                     
                     Spacer()
@@ -45,7 +45,7 @@ struct TranslationView: View {
                 }
             }
         }
-        .navigationTitle("Machine Translation")
+        .navigationTitle(Text("Machine Translation", bundle: .module))
         .navigationBarTitleDisplayMode(.inline)
     }
 }

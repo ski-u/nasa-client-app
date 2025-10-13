@@ -15,7 +15,7 @@ struct AppearanceView: View {
                 }
             ) {
                 HStack {
-                    Text("Light")
+                    Text("Light", bundle: .module)
                         .foregroundStyle(Color.primary)
                     
                     Spacer()
@@ -34,7 +34,7 @@ struct AppearanceView: View {
                 }
             ) {
                 HStack {
-                    Text("Dark")
+                    Text("Dark", bundle: .module)
                         .foregroundStyle(Color.primary)
                     
                     Spacer()
@@ -53,7 +53,7 @@ struct AppearanceView: View {
                 }
             ) {
                 HStack {
-                    Text("Automatic")
+                    Text("Automatic", bundle: .module)
                         .foregroundStyle(Color.primary)
                     
                     Spacer()
@@ -64,7 +64,7 @@ struct AppearanceView: View {
                 }
             }
         }
-        .navigationTitle("Appearance")
+        .navigationTitle(Text("Appearance", bundle: .module))
         .navigationBarTitleDisplayMode(.inline)
     }
 }

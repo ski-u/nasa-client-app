@@ -21,7 +21,7 @@ public struct SettingsView: View {
                     ) {
                         Label {
                             HStack {
-                                Text("API Key")
+                                Text("API Key", bundle: .module)
                                 
                                 Spacer()
                                 
@@ -39,11 +39,11 @@ public struct SettingsView: View {
                     } label: {
                         Label {
                             HStack {
-                                Text("Appearance")
+                                Text("Appearance", bundle: .module)
                                 
                                 Spacer()
                                 
-                                Text(store.userColorScheme.displayString)
+                                Text(store.userColorScheme.displayString, bundle: .module)
                                     .foregroundStyle(Color.secondary)
                             }
                         } icon: {
@@ -57,11 +57,11 @@ public struct SettingsView: View {
                     } label: {
                         Label {
                             HStack {
-                                Text("Machine Translation")
+                                Text("Machine Translation", bundle: .module)
                                 
                                 Spacer()
                                 
-                                Text(store.isTranslationEnabled ? "On" : "Off")
+                                Text(store.isTranslationEnabled ? "On" : "Off", bundle: .module)
                                     .foregroundStyle(Color.secondary)
                             }
                         } icon: {
@@ -75,10 +75,10 @@ public struct SettingsView: View {
                     NavigationLink {
                         LicenseListView()
                             .licenseViewStyle(.withRepositoryAnchorLink)
-                            .navigationTitle(.init("Acknowledgement"))
+                            .navigationTitle(Text("Acknowledgement", bundle: .module))
                     } label: {
                         Label {
-                            Text("Acknowledgement")
+                            Text("Acknowledgement", bundle: .module)
                         } icon: {
                             Image(systemName: "wrench.and.screwdriver.fill")
                                 .foregroundColor(.gray)
@@ -86,7 +86,7 @@ public struct SettingsView: View {
                     }
                 }
             }
-            .navigationTitle("Settings")
+            .navigationTitle(Text("Settings", bundle: .module))
         } destination: { store in
             switch store.case {
             case let .apiKeySetting(store):

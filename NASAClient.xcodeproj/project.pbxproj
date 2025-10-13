@@ -30,6 +30,7 @@
 		021A57BA269C141100A55AC1 /* NASAClientApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NASAClientApp.swift; sourceTree = "<group>"; };
 		021A57BE269C141200A55AC1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		021A57C1269C141200A55AC1 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		021D44652E9D43A400F8FD74 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; name = Info.plist; path = NASAClient/Info.plist; sourceTree = "<group>"; };
 		02BD2B392A28F20F00141B4F /* Features */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Features; sourceTree = "<group>"; };
 		02D592742BD3E7EE00793D03 /* AllTests.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = AllTests.xctestplan; sourceTree = "<group>"; };
 		02DE09272D0DCB9D0071B411 /* NASAClientTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NASAClientTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -64,6 +65,7 @@
 		021A57AE269C141100A55AC1 = {
 			isa = PBXGroup;
 			children = (
+				021D44652E9D43A400F8FD74 /* Info.plist */,
 				02D592742BD3E7EE00793D03 /* AllTests.xctestplan */,
 				02BD2B392A28F20F00141B4F /* Features */,
 				02E5A491270967FE00150E98 /* README.md */,
@@ -182,6 +184,7 @@
 			knownRegions = (
 				en,
 				Base,
+				ja,
 			);
 			mainGroup = 021A57AE269C141100A55AC1;
 			packageReferences = (
@@ -300,6 +303,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
@@ -355,6 +359,7 @@
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				VALIDATE_PRODUCT = YES;
 			};
@@ -371,6 +376,7 @@
 				DEVELOPMENT_TEAM = H6T6MUCK9A;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = NASAClient/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -401,6 +407,7 @@
 				DEVELOPMENT_TEAM = H6T6MUCK9A;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = NASAClient/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

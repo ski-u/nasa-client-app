@@ -14,7 +14,7 @@ struct APIKeySettingView: View {
         List {
             Section(footer: link) {
                 TextField(
-                    "Set your API key",
+                    String(localized: "Set your API key", bundle: .module),
                     text: viewStore.binding(
                         get: \.apiKeyInput.rawValue,
                         send: APIKeySetting.Action.setAPIKeyInput
@@ -23,12 +23,12 @@ struct APIKeySettingView: View {
                 .textFieldStyle(.plain)
             }
         }
-        .navigationTitle("API key")
+        .navigationTitle(Text("API key", bundle: .module))
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItem(placement: .confirmationAction) {
                 Button(action: { viewStore.send(.updateButtonTapped) }) {
-                    Text("Update")
+                    Text("Update", bundle: .module)
                 }
                 .disabled(!viewStore.isEdited)
             }
@@ -40,7 +40,7 @@ struct APIKeySettingView: View {
     
     private var link: some View {
         VStack(alignment: .leading, spacing: 4) {
-            Text("You can generate your API key on:")
+            Text("You can generate your API key on:", bundle: .module)
             Link(
                 "NASA Open APIs",
                 destination: URL(string: "https://api.nasa.gov/")!
