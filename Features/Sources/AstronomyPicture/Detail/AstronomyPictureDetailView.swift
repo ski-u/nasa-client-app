@@ -1,11 +1,13 @@
 import ComposableArchitecture
 import Models
 import SwiftUI
+import Translation
 
 struct AstronomyPictureDetailView: View {
     let picture: AstronomyPicture
     
     @State private var isPresentedFullScreenImage = false
+    @State private var isPresentedTranslation = false
     
     var body: some View {
         ScrollView {
@@ -28,6 +30,19 @@ struct AstronomyPictureDetailView: View {
                 .padding(.horizontal)
             }
         }
+        .toolbar {
+            ToolbarItem {
+                Button {
+                    isPresentedTranslation = true
+                } label: {
+                    Image(systemName: "translate")
+                }
+            }
+        }
+        .translationPresentation(
+            isPresented: $isPresentedTranslation,
+            text: picture.explanation,
+        )
     }
     
     @ViewBuilder
