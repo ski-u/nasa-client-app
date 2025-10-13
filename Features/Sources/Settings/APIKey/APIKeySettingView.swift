@@ -28,7 +28,7 @@ struct APIKeySettingView: View {
         .toolbar {
             ToolbarItem(placement: .confirmationAction) {
                 Button(action: { viewStore.send(.updateButtonTapped) }) {
-                    Text("Update", bundle: .module)
+                    Text("Save", bundle: .module)
                 }
                 .disabled(!viewStore.isEdited)
             }
