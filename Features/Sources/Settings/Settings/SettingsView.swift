@@ -41,6 +41,17 @@ public struct SettingsView: View {
                             Text("Appearance")
                         } icon: {
                             Image(systemName: "circle.lefthalf.filled")
+                                .foregroundStyle(Color.green)
+                        }
+                    }
+                    
+                    NavigationLink {
+                        TranslationView()
+                    } label: {
+                        Label {
+                            Text("Machine Translation")
+                        } icon: {
+                            Image(systemName: "translate")
                                 .foregroundStyle(Color.cyan)
                         }
                     }

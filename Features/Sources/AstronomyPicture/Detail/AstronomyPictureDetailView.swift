@@ -7,7 +7,13 @@ struct AstronomyPictureDetailView: View {
     let picture: AstronomyPicture
     
     @State private var isPresentedFullScreenImage = false
-    @State private var isPresentedTranslation = false
+    
+    @State private var translationConfig: TranslationSession.Configuration? = nil
+    @State private var translatedTitle: String? = nil
+    @State private var translatedExplanation: String? = nil
+    @State private var translationErrorString: String? = nil
+    
+    @Shared(.appStorage("isTranslationEnabled")) var isTranslationEnabled = false
     
     var body: some View {
         ScrollView {
@@ -15,10 +21,10 @@ struct AstronomyPictureDetailView: View {
                 media()
                 
                 VStack(alignment: .leading, spacing: 8) {
-                    Text(picture.title)
+                    Text(translatedTitle ?? picture.title)
                         .font(.title2.bold())
                     
-                    Text(picture.explanation)
+                    Text(translatedExplanation ?? picture.explanation)
                     
                     if let copyright = picture.copyright {
                         Text("copyright: \(copyright)")
@@ -30,19 +36,39 @@ struct AstronomyPictureDetailView: View {
                 .padding(.horizontal)
             }
         }
-        .toolbar {
-            ToolbarItem {
-                Button {
-                    isPresentedTranslation = true
-                } label: {
-                    Image(systemName: "translate")
+        .translationTask(translationConfig) { session in
+            Task { @MainActor in
+                do {
+                    let responses = try await session.translations(
+                        from: [
+                            .init(sourceText: picture.title, clientIdentifier: "title"),
+                            .init(sourceText: picture.explanation, clientIdentifier: "explanation"),
+                        ],
+                    )
+                    
+                    responses.forEach {
+                        switch $0.clientIdentifier {
+                        case "title":
+                            translatedTitle = $0.targetText
+                        case "explanation":
+                            translatedExplanation = $0.targetText
+                        default:
+                            break
+                        }
+                    }
+                } catch {
+                    translationErrorString = error.localizedDescription
                 }
             }
         }
-        .translationPresentation(
-            isPresented: $isPresentedTranslation,
-            text: picture.explanation,
-        )
+        .onAppear {
+            translationConfig = isTranslationEnabled
+                ? .init(
+                    source: .init(identifier: "en"),
+                    target: .init(identifier: "ja"),
+                )
+                : nil
+        }
     }
     
     @ViewBuilder
