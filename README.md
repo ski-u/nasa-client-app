@@ -8,6 +8,11 @@
 ## API: [NASA APIs](https://api.nasa.gov)
 
 ### [Astronomy Picture of the Day](https://apod.nasa.gov/apod/astropix.html)
+
+> [!important]
+> NASA isn't updating this API now (as of 2025/10/14)
+> > Due to the lapse in federal government funding, NASA is not updating this website. We sincerely regret this inconvenience.
+
 - https://github.com/nasa/apod-api
 
 ## Feature
