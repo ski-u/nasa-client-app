@@ -33,7 +33,7 @@ public struct TodayView: View {
                     ) {
                         Image(systemName: "calendar")
                     }
-                    .accessibilityLabel("History")
+                    .accessibilityLabel(Text("History", bundle: .module))
                 }
             }
             .refreshable {
@@ -44,7 +44,7 @@ public struct TodayView: View {
                     store.send(.fetch)
                 }
             }
-            .navigationTitle("Today")
+            .navigationTitle(Text("Today", bundle: .module))
         } destination: { store in
             switch store.case {
             case let .astronomyPictureList(store):
