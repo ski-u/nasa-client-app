@@ -40,7 +40,7 @@ public struct AppView: View {
             .tabItem {
                 VStack {
                     Image(systemName: "moon.stars")
-                    Text("Pictures")
+                    Text("Today", bundle: .module)
                 }
             }
             
@@ -48,7 +48,7 @@ public struct AppView: View {
                 .tabItem {
                     VStack {
                         Image(systemName: "gear")
-                        Text("Settings")
+                        Text("Settings", bundle: .module)
                     }
                 }
         }
@@ -58,7 +58,7 @@ public struct AppView: View {
         NavigationSplitView {
             List(SidebarItem.allCases, id: \.self, selection: $sidebarItem) { item in
                 Label {
-                    Text(item.displayName)
+                    Text(item.displayName, bundle: .module)
                 } icon: {
                     item.icon
                 }
@@ -79,7 +79,7 @@ public struct AppView: View {
         case today
         case setting
         
-        var displayName: String {
+        var displayName: LocalizedStringKey {
             switch self {
             case .today:
                 "Today"
