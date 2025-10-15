@@ -4,7 +4,7 @@ import Models
 
 @Reducer
 public struct Settings {
-    @Reducer(state: .equatable)
+    @Reducer
     public enum Path {
         case apiKeySetting(APIKeySetting)
     }
@@ -60,3 +60,5 @@ public struct Settings {
     
     public init() {}
 }
+
+extension Settings.Path.State: Equatable {}

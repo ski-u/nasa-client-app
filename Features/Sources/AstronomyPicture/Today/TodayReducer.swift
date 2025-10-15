@@ -5,7 +5,7 @@ import Models
 
 @Reducer
 public struct TodayReducer: Sendable {
-    @Reducer(state: .equatable)
+    @Reducer
     public enum Path {
         case astronomyPictureList(AstronomyPictureList)
     }
@@ -77,3 +77,5 @@ public struct TodayReducer: Sendable {
         .forEach(\.path, action: \.path)
     }
 }
+
+extension TodayReducer.Path.State: Equatable {}
