@@ -40,12 +40,8 @@ struct APIKeySettingView: View {
     
     private var link: some View {
         VStack(alignment: .leading, spacing: 4) {
-            Text("You can generate your API key on:", bundle: .module)
-            Link(
-                "NASA Open APIs",
-                destination: URL(string: "https://api.nasa.gov/")!
-            )
-            .font(.caption)
+            Text("You can generate your API key on [NASA Open APIs](https://api.nasa.gov)", bundle: .module)
+                .font(.caption)
         }
     }
 }

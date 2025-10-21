@@ -81,9 +81,6 @@
         }
       }
     },
-    "NASA Open APIs" : {
-      "shouldTranslate" : false
-    },
     "Off" : {
       "localizations" : {
         "ja" : {
@@ -134,12 +131,12 @@
         }
       }
     },
-    "You can generate your API key on:" : {
+    "You can generate your API key on [NASA Open APIs](https://api.nasa.gov)" : {
       "localizations" : {
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "APIキーは以下から取得できます:"
+            "value" : "[NASA Open APIs](https://api.nasa.gov)でAPIキーを作成できます"
           }
         }
       }
