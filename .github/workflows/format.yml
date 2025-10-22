@@ -6,16 +6,17 @@ on:
       - main
   workflow_dispatch:
 
+env:
+  DEVELOPER_DIR: /Applications/Xcode_26.0.app/Contents/Developer
+
 jobs:
   format:
     runs-on: macos-15
     timeout-minutes: 5
     steps:
       - uses: actions/checkout@v5
-      - name: Install swift-format
-        run: brew install swift-format
       - name: Run swift-format
-        run: swift-format . --in-place --recursive --configuration .swift-format
+        run: swift format . --in-place --recursive --configuration .swift-format
       - uses: peter-evans/create-pull-request@v7
         with:
           commit-message: run swift-format
