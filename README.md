@@ -23,11 +23,11 @@
 | -- | -- |
 | ![](./Screenshot/astronomy-picture-today.gif) | ![](./Screenshot/astronomy-picture-history.gif) |
 
-### Accesibility
+### Accesibility Support
 - Light / Dark mode
 - Dynamic Type
 - Localization (EN, JA)
-- Translate contents using [Translation framework](https://developer.apple.com/documentation/translation/)
+- Contents translation using [Translation framework](https://developer.apple.com/documentation/translation/)
 
 ## Tech stack
 - [cybozu/LicenseList](https://github.com/cybozu/LicenseList)
