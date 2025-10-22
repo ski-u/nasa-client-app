@@ -15,13 +15,19 @@
 
 - https://github.com/nasa/apod-api
 
-## Feature
+## Features
 
 ### See Astronomy Pictures
 
 | Today's picture | History |
 | -- | -- |
 | ![](./Screenshot/astronomy-picture-today.gif) | ![](./Screenshot/astronomy-picture-history.gif) |
+
+### Accesibility
+- Light / Dark mode
+- Dynamic Type
+- Localization (EN, JA)
+- Translate contents using [Translation framework](https://developer.apple.com/documentation/translation/)
 
 ## Tech stack
 - [cybozu/LicenseList](https://github.com/cybozu/LicenseList)
