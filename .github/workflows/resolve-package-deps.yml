@@ -6,11 +6,11 @@ on:
       - "Features/Package.swift"
 
 env:
-  DEVELOPER_DIR: /Applications/Xcode_26.0.app/Contents/Developer
+  DEVELOPER_DIR: /Applications/Xcode_26.2.0.app/Contents/Developer
 
 jobs:
   resolve-package-deps:
-    runs-on: macos-15
+    runs-on: macos-26
     timeout-minutes: 5
     permissions:
       contents: write
