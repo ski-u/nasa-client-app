@@ -25,6 +25,10 @@
 - Localization (EN, JA)
 - Contents translation using [Translation framework](https://developer.apple.com/documentation/translation/)
 
+## Environment
+- Xcode 26.2
+- Swift 6.2
+
 ## Tech stack
 - [cybozu/LicenseList](https://github.com/cybozu/LicenseList)
 - [kishikawakatsumi/KeychainAccess](https://github.com/kishikawakatsumi/KeychainAccess)
