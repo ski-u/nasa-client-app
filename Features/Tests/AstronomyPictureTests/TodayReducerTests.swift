@@ -134,7 +134,9 @@ struct TodayReducerTests {
         @Test
         func success() async throws {
             let store = TestStore(
-                initialState: TodayReducer.State()
+                initialState: TodayReducer.State(
+                    error: .init("error")
+                )
             ) {
                 TodayReducer()
             }
@@ -143,6 +145,7 @@ struct TodayReducerTests {
             store.dependencies.apiClient.fetchTodayPicture = { mock }
             
             await store.send(.retryButtonTapped) {
+                $0.error = nil
                 $0.isLoading = true
             }
             
@@ -155,7 +158,9 @@ struct TodayReducerTests {
         @Test
         func failure() async throws {
             let store = TestStore(
-                initialState: TodayReducer.State()
+                initialState: TodayReducer.State(
+                    error: .init("error")
+                )
             ) {
                 TodayReducer()
             }
@@ -164,6 +169,7 @@ struct TodayReducerTests {
             store.dependencies.apiClient.fetchTodayPicture = { throw error }
             
             await store.send(.retryButtonTapped) {
+                $0.error = nil
                 $0.isLoading = true
             }
             
