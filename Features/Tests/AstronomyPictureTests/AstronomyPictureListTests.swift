@@ -8,51 +8,123 @@ import Testing
 
 @MainActor
 struct AstronomyPictureListTests {
-    @Test
-    func fetch() async throws {
-        let store = TestStore(
-            initialState: AstronomyPictureList.State()
-        ) {
-            AstronomyPictureList()
+    @MainActor
+    struct OnAppear {
+        @Test
+        func success() async throws {
+            let store = TestStore(
+                initialState: AstronomyPictureList.State()
+            ) {
+                AstronomyPictureList()
+            }
+            
+            store.dependencies.apiClient.fetchAstronomyPictures = {
+                [.mockImage()]
+            }
+            
+            await store.send(.onAppear) {
+                $0.isLoading = true
+            }
+            
+            await store.receive(\.response.success, [.mockImage()]) {
+                $0.isLoaded = true
+                $0.isLoading = false
+                $0.pictures = [.mockImage()]
+            }
         }
         
-        store.dependencies.apiClient.fetchAstronomyPictures = {
-            [.mockImage()]
+        @Test
+        func failure() async throws {
+            let store = TestStore(
+                initialState: AstronomyPictureList.State()
+            ) {
+                AstronomyPictureList()
+            }
+            
+            let error = NSError(domain: "test", code: 1)
+            store.dependencies.apiClient.fetchAstronomyPictures = {
+                throw error
+            }
+            
+            await store.send(.onAppear) {
+                $0.isLoading = true
+            }
+            
+            await store.receive(\.response.failure) {
+                $0.error = .init(error.localizedDescription)
+                $0.isLoading = false
+            }
         }
         
-        await store.send(.fetch) {
-            $0.isLoading = true
+        @Test
+        func alreadyLoaded() async throws {
+            let store = TestStore(
+                initialState: AstronomyPictureList.State(
+                    isLoaded: true,
+                    pictures: [.mockImage()]
+                )
+            ) {
+                AstronomyPictureList()
+            }
+            
+            await store.send(.onAppear)
+            
+            // Canceled to load
         }
-        
-        await store.receive(\.response.success, [.mockImage()]) {
-            $0.isLoaded = true
-            $0.isLoading = false
-            $0.pictures = [.mockImage()]
-        }
-        
-        await store.send(.fetch)
     }
     
-    @Test
-    func fetchFailed() async throws {
-        let store = TestStore(
-            initialState: AstronomyPictureList.State()
-        ) {
-            AstronomyPictureList()
+    @MainActor
+    struct Retry {
+        @Test
+        func success() async throws {
+            let store = TestStore(
+                initialState: AstronomyPictureList.State(
+                    error: .init("error")
+                )
+            ) {
+                AstronomyPictureList()
+            }
+            
+            store.dependencies.apiClient.fetchAstronomyPictures = {
+                [.mockImage()]
+            }
+            
+            await store.send(.retryButtonTapped) {
+                $0.error = nil
+                $0.isLoading = true
+            }
+            
+            await store.receive(\.response.success, [.mockImage()]) {
+                $0.isLoaded = true
+                $0.isLoading = false
+                $0.pictures = [.mockImage()]
+            }
         }
         
-        let error = NSError(domain: "test", code: 1)
-        store.dependencies.apiClient.fetchAstronomyPictures = {
-            throw error
-        }
-        
-        await store.send(.fetch) {
-            $0.isLoading = true
-        }
-        
-        await store.receive(\.response.failure) {
-            $0.error = .init(error.localizedDescription)
-            $0.isLoading = false
+        @Test
+        func failure() async throws {
+            let store = TestStore(
+                initialState: AstronomyPictureList.State(
+                    error: .init("error")
+                )
+            ) {
+                AstronomyPictureList()
+            }
+            
+            let error = NSError(domain: "test", code: 1)
+            store.dependencies.apiClient.fetchAstronomyPictures = {
+                throw error
+            }
+            
+            await store.send(.retryButtonTapped) {
+                $0.error = nil
+                $0.isLoading = true
+            }
+            
+            await store.receive(\.response.failure) {
+                $0.error = .init(error.localizedDescription)
+                $0.isLoading = false
+            }
         }
     }
 }

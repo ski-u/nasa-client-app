@@ -25,8 +25,9 @@ public struct AstronomyPictureList: Sendable {
     }
     
     public enum Action {
-        case fetch
+        case onAppear
         case response(Result<[AstronomyPicture], any Error>)
+        case retryButtonTapped
     }
     
     public init() {}
@@ -37,23 +38,11 @@ public struct AstronomyPictureList: Sendable {
     
     public func reduce(into state: inout State, action: Action) -> Effect<Action> {
         switch action {
-        case .fetch:
+        case .onAppear:
             if state.isLoaded {
                 return .none
             }
-            
-            state.error = nil
-            state.isLoading = true
-            return .run { send in
-                await send(
-                    .response(
-                        Result {
-                            try await client.fetchAstronomyPictures()
-                        }
-                    )
-                )
-            }
-            .cancellable(id: CancelID.fetch, cancelInFlight: true)
+            return fetchAstronomyPictures(state: &state)
 
         case let .response(.success(pictures)):
             state.isLoaded = true
@@ -65,6 +54,25 @@ public struct AstronomyPictureList: Sendable {
             state.error = .init(error.localizedDescription)
             state.isLoading = false
             return .none
+            
+        case .retryButtonTapped:
+            return fetchAstronomyPictures(state: &state)
         }
+    }
+    
+    private func fetchAstronomyPictures(state: inout State) -> Effect<Action> {
+        state.error = nil
+        state.isLoading = true
+        
+        return .run { send in
+            await send(
+                .response(
+                    Result {
+                        try await client.fetchAstronomyPictures()
+                    }
+                )
+            )
+        }
+        .cancellable(id: CancelID.fetch, cancelInFlight: true)
     }
 }

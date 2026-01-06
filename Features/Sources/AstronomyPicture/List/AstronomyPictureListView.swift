@@ -14,7 +14,7 @@ struct AstronomyPictureListView: View {
             }
         }
         .onAppear {
-            store.send(.fetch)
+            store.send(.onAppear)
         }
         .navigationTitle(.init("Astronomy Pictures"))
         .navigationBarTitleDisplayMode(.inline)
@@ -47,7 +47,7 @@ struct AstronomyPictureListView: View {
         Section(
             header: ErrorRetryView(
                 error: error,
-                retry: { store.send(.fetch) }
+                retry: { store.send(.retryButtonTapped) }
             )
             .textCase(nil)
         ) {}
