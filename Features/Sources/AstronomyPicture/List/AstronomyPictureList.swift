@@ -54,7 +54,7 @@ public struct AstronomyPictureList: Sendable {
             state.error = .init(error.localizedDescription)
             state.isLoading = false
             return .none
-            
+
         case .retryButtonTapped:
             return fetchAstronomyPictures(state: &state)
         }

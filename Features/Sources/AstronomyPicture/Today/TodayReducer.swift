@@ -52,13 +52,13 @@ public struct TodayReducer: Sendable {
                     return .none
                 }
                 return fetchTodayPicture(state: &state)
-                
+
             case .path:
                 return .none
-                
+
             case .pulledToRefresh:
                 return fetchTodayPicture(state: &state)
-                
+
             case let .response(.success(picture)):
                 state.isLoading = false
                 state.picture = picture
@@ -68,7 +68,7 @@ public struct TodayReducer: Sendable {
                 state.error = .init(error.localizedDescription)
                 state.isLoading = false
                 return .none
-                
+
             case .retryButtonTapped:
                 return fetchTodayPicture(state: &state)
             }
