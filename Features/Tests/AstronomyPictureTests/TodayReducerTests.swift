@@ -8,7 +8,7 @@ import Testing
 @testable import AstronomyPicture
 
 @MainActor
-struct TodayTests {
+struct TodayReducerTests {
     @MainActor
     struct OnAppear {
         @Test
