@@ -9,45 +9,168 @@ import Testing
 
 @MainActor
 struct TodayTests {
-    @Test
-    func successfulFetch() async throws {
-        let store = TestStore(
-            initialState: TodayReducer.State()
-        ) {
-            TodayReducer()
+    @MainActor
+    struct OnAppear {
+        @Test
+        func success() async throws {
+            let store = TestStore(
+                initialState: TodayReducer.State()
+            ) {
+                TodayReducer()
+            }
+            
+            let mock = AstronomyPicture.mockImage()
+            store.dependencies.apiClient.fetchTodayPicture = { mock }
+            
+            await store.send(.onAppear) {
+                $0.isLoading = true
+            }
+            
+            await store.receive(\.response.success) {
+                $0.isLoading = false
+                $0.picture = mock
+            }
         }
         
-        let mock = AstronomyPicture.mockImage()
-        store.dependencies.apiClient.fetchTodayPicture = { mock }
-        
-        await store.send(.fetch) {
-            $0.isLoading = true
+        @Test
+        func failure() async throws {
+            let store = TestStore(
+                initialState: TodayReducer.State()
+            ) {
+                TodayReducer()
+            }
+            
+            let error = NSError(domain: "test", code: 1)
+            store.dependencies.apiClient.fetchTodayPicture = { throw error }
+            
+            await store.send(.onAppear) {
+                $0.isLoading = true
+            }
+            
+            await store.receive(\.response.failure) {
+                $0.error = .init(error.localizedDescription)
+                $0.isLoading = false
+            }
         }
         
-        await store.receive(\.response.success) {
-            $0.isLoading = false
-            $0.picture = mock
+        @Test
+        func alreadyLoaded() async throws {
+            let store = TestStore(
+                initialState: TodayReducer.State(
+                    picture: .mockImage(),
+                )
+            ) {
+                TodayReducer()
+            }
+            
+            await store.send(.onAppear)
+            
+            // Canceled to load
+        }
+        
+        @Test
+        func whenLoading() async throws {
+            let store = TestStore(
+                initialState: TodayReducer.State(
+                    isLoading: true,
+                )
+            ) {
+                TodayReducer()
+            }
+            
+            await store.send(.onAppear)
+            
+            // Canceled to load
         }
     }
     
-    @Test
-    func failedFetch() async throws {
-        let store = TestStore(
-            initialState: TodayReducer.State()
-        ) {
-            TodayReducer()
+    @MainActor
+    struct Refresh {
+        @Test
+        func success() async throws {
+            let store = TestStore(
+                initialState: TodayReducer.State()
+            ) {
+                TodayReducer()
+            }
+            
+            let mock = AstronomyPicture.mockImage()
+            store.dependencies.apiClient.fetchTodayPicture = { mock }
+            
+            await store.send(.pulledToRefresh) {
+                $0.isLoading = true
+            }
+            
+            await store.receive(\.response.success) {
+                $0.isLoading = false
+                $0.picture = mock
+            }
         }
         
-        let error = NSError(domain: "test", code: 1)
-        store.dependencies.apiClient.fetchTodayPicture = { throw error }
-        
-        await store.send(.fetch) {
-            $0.isLoading = true
+        @Test
+        func failure() async throws {
+            let store = TestStore(
+                initialState: TodayReducer.State()
+            ) {
+                TodayReducer()
+            }
+            
+            let error = NSError(domain: "test", code: 1)
+            store.dependencies.apiClient.fetchTodayPicture = { throw error }
+            
+            await store.send(.pulledToRefresh) {
+                $0.isLoading = true
+            }
+            
+            await store.receive(\.response.failure) {
+                $0.error = .init(error.localizedDescription)
+                $0.isLoading = false
+            }
+        }
+    }
+    
+    @MainActor
+    struct Retry {
+        @Test
+        func success() async throws {
+            let store = TestStore(
+                initialState: TodayReducer.State()
+            ) {
+                TodayReducer()
+            }
+            
+            let mock = AstronomyPicture.mockImage()
+            store.dependencies.apiClient.fetchTodayPicture = { mock }
+            
+            await store.send(.retryButtonTapped) {
+                $0.isLoading = true
+            }
+            
+            await store.receive(\.response.success) {
+                $0.isLoading = false
+                $0.picture = mock
+            }
         }
         
-        await store.receive(\.response.failure) {
-            $0.error = .init(error.localizedDescription)
-            $0.isLoading = false
+        @Test
+        func failure() async throws {
+            let store = TestStore(
+                initialState: TodayReducer.State()
+            ) {
+                TodayReducer()
+            }
+            
+            let error = NSError(domain: "test", code: 1)
+            store.dependencies.apiClient.fetchTodayPicture = { throw error }
+            
+            await store.send(.retryButtonTapped) {
+                $0.isLoading = true
+            }
+            
+            await store.receive(\.response.failure) {
+                $0.error = .init(error.localizedDescription)
+                $0.isLoading = false
+            }
         }
     }
 }

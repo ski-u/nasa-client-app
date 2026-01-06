@@ -31,9 +31,11 @@ public struct TodayReducer: Sendable {
     }
     
     public enum Action {
-        case fetch
+        case onAppear
         case path(StackActionOf<Path>)
+        case pulledToRefresh
         case response(Result<AstronomyPicture, any Error>)
+        case retryButtonTapped
     }
     
     public init() {}
@@ -45,24 +47,18 @@ public struct TodayReducer: Sendable {
     public var body: some ReducerOf<Self> {
         Reduce { state, action in
             switch action {
-            case .fetch:
-                state.error = nil
-                state.isLoading = true
-                state.picture = nil
-                return .run { send in
-                    await send(
-                        .response(
-                            Result {
-                                try await client.fetchTodayPicture()
-                            }
-                        )
-                    )
+            case .onAppear:
+                if state.picture != nil || state.isLoading {
+                    return .none
                 }
-                .cancellable(id: CancelID.fetch, cancelInFlight: true)
-
+                return fetchTodayPicture(state: &state)
+                
             case .path:
                 return .none
-
+                
+            case .pulledToRefresh:
+                return fetchTodayPicture(state: &state)
+                
             case let .response(.success(picture)):
                 state.isLoading = false
                 state.picture = picture
@@ -72,9 +68,29 @@ public struct TodayReducer: Sendable {
                 state.error = .init(error.localizedDescription)
                 state.isLoading = false
                 return .none
+                
+            case .retryButtonTapped:
+                return fetchTodayPicture(state: &state)
             }
         }
         .forEach(\.path, action: \.path)
+    }
+    
+    private func fetchTodayPicture(state: inout State) -> Effect<Action> {
+        state.error = nil
+        state.isLoading = true
+        state.picture = nil
+        
+        return .run { send in
+            await send(
+                .response(
+                    Result {
+                        try await client.fetchTodayPicture()
+                    }
+                )
+            )
+        }
+        .cancellable(id: CancelID.fetch, cancelInFlight: true)
     }
 }
 

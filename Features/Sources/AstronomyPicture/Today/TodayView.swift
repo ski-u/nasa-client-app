@@ -37,12 +37,10 @@ public struct TodayView: View {
                 }
             }
             .refreshable {
-                store.send(.fetch)
+                store.send(.pulledToRefresh)
             }
             .onAppear {
-                if store.picture == nil, !store.isLoading {
-                    store.send(.fetch)
-                }
+                store.send(.onAppear)
             }
             .navigationTitle(Text("Today", bundle: .module))
         } destination: { store in
@@ -57,7 +55,7 @@ public struct TodayView: View {
         Section(
             header: ErrorRetryView(
                 error: error,
-                retry: { store.send(.fetch) }
+                retry: { store.send(.retryButtonTapped) }
             )
             .textCase(nil)
         ) {}
