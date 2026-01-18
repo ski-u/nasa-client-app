@@ -17,7 +17,7 @@
 
 | Today's picture | History |
 | -- | -- |
-| ![](./Screenshot/astronomy-picture-today.gif) | ![](./Screenshot/astronomy-picture-history.gif) |
+| ![](./Screenshots/astronomy-picture-today.gif) | ![](./Screenshots/astronomy-picture-history.gif) |
 
 ### Accesibility Support
 - Light / Dark mode
