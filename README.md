@@ -7,9 +7,10 @@
 
 ## API: [NASA APIs](https://api.nasa.gov)
 
-### [Astronomy Picture of the Day](https://apod.nasa.gov/apod/astropix.html)
+### Astronomy Picture of the Day
 
-- https://github.com/nasa/apod-api
+- Official website: https://apod.nasa.gov/apod/astropix.html
+- GitHub repo: https://github.com/nasa/apod-api
 
 ## Features
 
@@ -20,16 +21,19 @@
 | ![](./Screenshots/astronomy-picture-today.gif) | ![](./Screenshots/astronomy-picture-history.gif) |
 
 ### Accesibility Support
+
 - Light / Dark mode
 - Dynamic Type
 - Localization (EN, JA)
 - Contents translation using [Translation framework](https://developer.apple.com/documentation/translation/)
 
 ## Environment
+
 - Xcode 26.2
 - Swift 6.2
 
 ## Tech stack
+
 - [cybozu/LicenseList](https://github.com/cybozu/LicenseList)
 - [kishikawakatsumi/KeychainAccess](https://github.com/kishikawakatsumi/KeychainAccess)
 - [konomae/swift-local-date](https://github.com/konomae/swift-local-date)
