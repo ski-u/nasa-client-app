@@ -25,7 +25,7 @@
 - Light / Dark mode
 - Dynamic Type
 - Localization (EN, JA)
-- Contents translation using [Translation framework](https://developer.apple.com/documentation/translation/)
+- Contents translation (EN → JA) using [Translation framework](https://developer.apple.com/documentation/translation/)
 
 ## Environment
 
