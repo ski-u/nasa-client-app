@@ -27,6 +27,18 @@
 - Localization (EN, JA)
 - Contents translation (EN → JA) using [Translation framework](https://developer.apple.com/documentation/translation/)
 
+## Project Architecture
+
+- [pointfreeco/swift-composable-architecture](https://github.com/pointfreeco/swift-composable-architecture) based architecture
+- Modularized using Swift Package Manager
+
+## Getting Started
+
+1. Clone the repo
+2. Open `NASAClient.xcodeproj`
+3. Choose `MASAClient` scheme
+4. Run the app
+
 ## Environment
 
 - Xcode 26.2
