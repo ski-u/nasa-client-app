@@ -81,6 +81,16 @@
         }
       }
     },
+    "None" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "未設定"
+          }
+        }
+      }
+    },
     "Off" : {
       "localizations" : {
         "ja" : {

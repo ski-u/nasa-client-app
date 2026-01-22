@@ -62,7 +62,7 @@ public struct TodayView: View {
                 .font(.largeTitle)
                 .padding()
             
-            Text("API key configuration is required in the Settings tab to retrieve data.")
+            Text("API key configuration is required in the Settings tab to retrieve data.", bundle: .module)
                 .font(.body)
                 .multilineTextAlignment(.center)
                 .foregroundColor(.gray)

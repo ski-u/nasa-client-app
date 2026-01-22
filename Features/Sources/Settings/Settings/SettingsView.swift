@@ -25,8 +25,13 @@ public struct SettingsView: View {
                                 
                                 Spacer()
                                 
-                                Text(store.apiKey.masked ?? "None")
-                                    .foregroundStyle(Color.secondary)
+                                if let key = store.apiKey.masked {
+                                    Text(key)
+                                        .foregroundStyle(Color.secondary)
+                                } else {
+                                    Text("None", bundle: .module)
+                                        .foregroundStyle(Color.secondary)
+                                }
                             }
                         } icon: {
                             Image(systemName: "key.fill")
