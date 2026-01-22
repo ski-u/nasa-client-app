@@ -1,3 +1,4 @@
+import APIKeyClient
 import ComposableArchitecture
 import LocalDate
 import Models
@@ -8,6 +9,8 @@ public struct TodayView: View {
     
     @State private var isPresentedFullScreenImage = false
     
+    @Dependency(\.apiKeyClient) private var apiKeyClient
+    
     public init(store: StoreOf<TodayReducer>) {
         self.store = store
     }
@@ -15,7 +18,9 @@ public struct TodayView: View {
     public var body: some View {
         NavigationStack(path: $store.scope(state: \.path, action: \.path)) {
             Group {
-                if let error = store.error {
+                if !apiKeyClient.isKeyStored() {
+                    apiKeyRequiredView()
+                } else if let error = store.error {
                     errorRetryView(error: error)
                 } else if let picture = store.picture {
                     AstronomyPictureDetailView(picture: picture)
@@ -49,6 +54,23 @@ public struct TodayView: View {
                 AstronomyPictureListView(store: store)
             }
         }
+    }
+    
+    private func apiKeyRequiredView() -> some View {
+        VStack(spacing: 8) {
+            Text("🔑")
+                .font(.largeTitle)
+                .padding()
+            
+            Text("API key configuration is required in the Settings tab to retrieve data.")
+                .font(.body)
+                .multilineTextAlignment(.center)
+                .foregroundColor(.gray)
+            
+            // TODO: add a button to open API key setting screen
+        }
+        .frame(maxWidth: .infinity)
+        .padding()
     }
     
     private func errorRetryView(error: TextState) -> some View {

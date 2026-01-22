@@ -98,6 +98,7 @@ let package = Package(
             name: "AstronomyPicture",
             dependencies: [
                 "APIClient",
+                "APIKeyClient",
                 .product(name: "ComposableArchitecture", package: "swift-composable-architecture"),
             ]
         ),

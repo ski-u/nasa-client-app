@@ -4,6 +4,19 @@
     "⛔" : {
       "shouldTranslate" : false
     },
+    "🔑" : {
+      "shouldTranslate" : false
+    },
+    "API key configuration is required in the Settings tab to retrieve data." : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "データ取得には設定タブでのAPIキーの設定が必要です"
+          }
+        }
+      }
+    },
     "Astronomy Pictures" : {
       "shouldTranslate" : false
     },
