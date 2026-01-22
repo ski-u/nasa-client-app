@@ -5,6 +5,7 @@ import Models
 @DependencyClient
 public struct APIKeyClient: Sendable {
     public var getKey: @Sendable () -> APIKey?
+    public var isKeyStored: @Sendable () -> Bool = { false }
     public var setKey: @Sendable (APIKey?) -> Void
 }
 

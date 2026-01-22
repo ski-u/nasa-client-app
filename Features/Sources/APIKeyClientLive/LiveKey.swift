@@ -13,6 +13,9 @@ extension APIKeyClient: DependencyKey {
             getKey: {
                 keychain["APIKey"].map(APIKey.init(rawValue:))
             },
+            isKeyStored: {
+                keychain["APIKey"].map(APIKey.init(rawValue:)) != nil
+            },
             setKey: {
                 keychain.accessibility(.whenUnlockedThisDeviceOnly)["APIKey"] = $0?.rawValue
             }
