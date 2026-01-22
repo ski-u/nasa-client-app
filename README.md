@@ -16,6 +16,9 @@
 
 ### See Astronomy Pictures
 
+> [!warning]
+> API key configuration is required to retrieve data.
+
 | Today's picture | History |
 | -- | -- |
 | ![](./Screenshots/astronomy-picture-today.gif) | ![](./Screenshots/astronomy-picture-history.gif) |
