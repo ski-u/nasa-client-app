@@ -36,7 +36,7 @@
 
 1. Clone the repo
 2. Open `NASAClient.xcodeproj`
-3. Choose `MASAClient` scheme
+3. Choose `NASAClient` scheme
 4. Run the app
 
 ## Environment
