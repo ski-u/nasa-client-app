@@ -19,10 +19,11 @@ extension APIClient: DependencyKey {
                         URLQueryItem(
                             name: "start_date",
                             value: LocalDate().addingMonths(-1).description
-                        ),
+                        )
                     ]
                 )
-                return payloads
+                return
+                    payloads
                     .map(AstronomyPicture.init)
                     .reversed()
             },
@@ -32,19 +33,20 @@ extension APIClient: DependencyKey {
             }
         )
     }
-
+    
     private static func fetch<T: Decodable>(
         path: String,
         queryItems: [URLQueryItem] = []
     ) async throws -> T {
         var urlComponents = URLComponents(url: baseURL, resolvingAgainstBaseURL: false)!
         urlComponents.path = path
-        urlComponents.queryItems = [
-            URLQueryItem(name: "api_key", value: apiKeyClient.getKey()?.rawValue)
-        ] + queryItems
-
+        urlComponents.queryItems =
+            [
+                URLQueryItem(name: "api_key", value: apiKeyClient.getKey()?.rawValue)
+            ] + queryItems
+        
         let (data, _) = try await URLSession.shared.data(from: urlComponents.url!)
-
+        
         return try JSONDecoder().decode(T.self, from: data)
     }
 }
