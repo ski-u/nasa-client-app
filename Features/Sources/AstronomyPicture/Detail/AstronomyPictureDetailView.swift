@@ -8,6 +8,9 @@ struct AstronomyPictureDetailView: View {
     
     @State private var isPresentedFullScreenImage = false
     
+    // TODO: Run translation in a reducer
+    // 1. Create a new dependency client for `TranslationSession`
+    // 2. Create a new reducer for `AstronomyPictureDetailView`
     @State private var translationConfig: TranslationSession.Configuration? = nil
     @State private var translatedTitle: String? = nil
     @State private var translatedExplanation: String? = nil
