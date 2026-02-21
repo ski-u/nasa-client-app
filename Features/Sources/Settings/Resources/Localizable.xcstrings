@@ -141,6 +141,16 @@
         }
       }
     },
+    "Supports translation into Japanese" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "日本語への翻訳をサポートしています"
+          }
+        }
+      }
+    },
     "You can generate your API key on [NASA Open APIs](https://api.nasa.gov)" : {
       "localizations" : {
         "ja" : {
