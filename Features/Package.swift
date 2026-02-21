@@ -6,7 +6,7 @@ import PackageDescription
 let package = Package(
     name: "Features",
     defaultLocalization: "en",
-    platforms: [.iOS(.v18)],
+    platforms: [.iOS(.v26)],
     products: [
         .library(
             name: "APIClient",
