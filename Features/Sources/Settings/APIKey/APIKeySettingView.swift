@@ -2,23 +2,14 @@ import ComposableArchitecture
 import SwiftUI
 
 struct APIKeySettingView: View {
-    let store: StoreOf<APIKeySetting>
-    @ObservedObject private var viewStore: ViewStoreOf<APIKeySetting>
-    
-    init(store: StoreOf<APIKeySetting>) {
-        self.store = store
-        viewStore = .init(store, observe: { $0 })
-    }
+    @Bindable var store: StoreOf<APIKeySetting>
     
     var body: some View {
         List {
             Section(footer: link) {
                 TextField(
                     String(localized: "Set your API key", bundle: .module),
-                    text: viewStore.binding(
-                        get: \.apiKeyInput.rawValue,
-                        send: APIKeySetting.Action.setAPIKeyInput
-                    )
+                    text: $store.apiKeyInput.rawValue
                 )
                 .textFieldStyle(.plain)
             }
@@ -27,14 +18,14 @@ struct APIKeySettingView: View {
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItem(placement: .confirmationAction) {
-                Button(action: { viewStore.send(.updateButtonTapped) }) {
+                Button(action: { store.send(.updateButtonTapped) }) {
                     Text("Save", bundle: .module)
                 }
-                .disabled(!viewStore.isEdited)
+                .disabled(!store.isEdited)
             }
         }
         .onAppear {
-            viewStore.send(.onAppear)
+            store.send(.onAppear)
         }
     }
     

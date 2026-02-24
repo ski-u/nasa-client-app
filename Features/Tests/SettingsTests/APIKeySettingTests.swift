@@ -6,19 +6,6 @@ import Testing
 @MainActor
 struct APIKeySettingTests {
     @Test
-    func setAPIKeyInput() async throws {
-        let store = TestStore(
-            initialState: APIKeySetting.State()
-        ) {
-            APIKeySetting()
-        }
-        
-        await store.send(.setAPIKeyInput("test")) {
-            $0.apiKeyInput = .init(rawValue: "test")
-        }
-    }
-    
-    @Test
     func onAppear() async throws {
         let store = TestStore(
             initialState: APIKeySetting.State()
