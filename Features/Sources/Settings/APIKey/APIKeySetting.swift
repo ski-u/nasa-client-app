@@ -45,7 +45,7 @@ public struct APIKeySetting {
             switch action {
             case .binding:
                 return .none
-                
+
             case .delegate:
                 return .none
 
