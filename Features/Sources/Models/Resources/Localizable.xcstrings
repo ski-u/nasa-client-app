@@ -1,0 +1,20 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "API key configuration is required in the Settings tab to retrieve data" : {
+
+    },
+    "API key configuration is required in the Settings tab to retrieve data." : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "データ取得には設定タブでのAPIキーの設定が必要です"
+          }
+        }
+      }
+    }
+  },
+  "version" : "1.1"
+}

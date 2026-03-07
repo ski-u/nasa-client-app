@@ -47,11 +47,15 @@ extension APIClient: DependencyKey {
         path: String,
         queryItems: [URLQueryItem] = []
     ) async throws -> T {
+        guard let apiKey = apiKeyClient.getKey() else {
+            throw NASAClientError.missingAPIKey
+        }
+        
         var urlComponents = URLComponents(url: baseURL, resolvingAgainstBaseURL: false)!
         urlComponents.path = path
         urlComponents.queryItems =
             [
-                URLQueryItem(name: "api_key", value: apiKeyClient.getKey()?.rawValue)
+                URLQueryItem(name: "api_key", value: apiKey.rawValue)
             ] + queryItems
         
         let (data, _) = try await URLSession.shared.data(from: urlComponents.url!)
