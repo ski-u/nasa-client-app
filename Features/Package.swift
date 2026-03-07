@@ -33,6 +33,10 @@ let package = Package(
             targets: ["AstronomyPicture"]
         ),
         .library(
+            name: "DateFormatting",
+            targets: ["DateFormatting"]
+        ),
+        .library(
             name: "Models",
             targets: ["Models"]
         ),
@@ -65,6 +69,7 @@ let package = Package(
             dependencies: [
                 "APIClient",
                 "APIKeyClientLive",
+                "DateFormatting",
                 .product(name: "LocalDate", package: "swift-local-date"),
             ]
         ),
@@ -105,6 +110,14 @@ let package = Package(
         .testTarget(
             name: "AstronomyPictureTests",
             dependencies: ["AstronomyPicture"]
+        ),
+        .target(
+            name: "DateFormatting",
+            dependencies: []
+        ),
+        .testTarget(
+            name: "DateFormattingTests",
+            dependencies: ["DateFormatting"]
         ),
         .target(
             name: "Models",

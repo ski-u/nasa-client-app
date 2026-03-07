@@ -29,6 +29,13 @@
     {
       "target" : {
         "containerPath" : "container:Features",
+        "identifier" : "DateFormattingTests",
+        "name" : "DateFormattingTests"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:Features",
         "identifier" : "SettingsTests",
         "name" : "SettingsTests"
       }
