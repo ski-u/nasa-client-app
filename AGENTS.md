@@ -47,6 +47,19 @@ xcodebuild \
   test
 ```
 
+- If you want to specify tests more precisely, use `-only-testing`
+
+```bash
+xcodebuild \
+  -project NASAClient.xcodeproj \
+  -scheme <SCHEME> \
+  -destination 'platform=iOS Simulator,name=iPhone 17' \
+  -skipPackagePluginValidation \
+  -skipMacroValidation \
+  -only-testing:<TestTarget[/TestClass[/testMethod]]> \
+  test
+```
+
 ### Format
 
 ```bash
