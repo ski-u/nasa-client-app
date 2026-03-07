@@ -22,7 +22,7 @@ struct FullScreenImageView: View {
                             .resizable()
                             .aspectRatio(contentMode: .fit)
                     @unknown default:
-                        Text("Unexpected error occurred.")
+                        Text("Unexpected error occurred", bundle: .module)
                     }
                 }
             } else {

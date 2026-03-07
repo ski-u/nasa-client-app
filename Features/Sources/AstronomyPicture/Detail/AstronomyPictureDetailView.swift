@@ -110,7 +110,7 @@ struct AstronomyPictureDetailView: View {
                     .frame(maxWidth: .infinity)
                     .textCase(nil)
                 @unknown default:
-                    Text("Unexpected error occurred.")
+                    Text("Unexpected error occurred", bundle: .module)
                 }
             }
         case .video:
@@ -119,7 +119,7 @@ struct AstronomyPictureDetailView: View {
         case .other:
             EmptyView()
         case .unknown:
-            Text("Unexpected error occurred.")
+            Text("Unexpected error occurred", bundle: .module)
         }
     }
 }

@@ -44,6 +44,10 @@ let package = Package(
             name: "Settings",
             targets: ["Settings"]
         ),
+        .library(
+            name: "SharedUI",
+            targets: ["SharedUI"]
+        ),
     ],
     dependencies: [
         .package(url: "https://github.com/cybozu/LicenseList.git", exact: "2.2.0"),
@@ -103,6 +107,7 @@ let package = Package(
             name: "AstronomyPicture",
             dependencies: [
                 "APIClient",
+                "SharedUI",
                 .product(name: "ComposableArchitecture", package: "swift-composable-architecture"),
             ]
         ),
@@ -140,6 +145,10 @@ let package = Package(
         .testTarget(
             name: "SettingsTests",
             dependencies: ["Settings"]
+        ),
+        .target(
+            name: "SharedUI",
+            dependencies: []
         ),
     ]
 )

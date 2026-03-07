@@ -1,5 +1,6 @@
 import ComposableArchitecture
 import Models
+import SharedUI
 import SwiftUI
 
 struct AstronomyPictureListView: View {
@@ -8,7 +9,12 @@ struct AstronomyPictureListView: View {
     var body: some View {
         List {
             if let error = store.error {
-                errorRetryView(error: error)
+                Section(
+                    header: ErrorView(
+                        error: Text(error),
+                        retry: { store.send(.retryButtonTapped) },
+                    )
+                ) {}
             } else {
                 content
             }
@@ -41,16 +47,6 @@ struct AstronomyPictureListView: View {
             .disabled(!store.isLoaded)
         }
         .redacted(reason: store.isLoading ? .placeholder : [])
-    }
-    
-    private func errorRetryView(error: TextState) -> some View {
-        Section(
-            header: ErrorRetryView(
-                error: error,
-                retry: { store.send(.retryButtonTapped) }
-            )
-            .textCase(nil)
-        ) {}
     }
 }
 

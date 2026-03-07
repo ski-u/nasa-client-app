@@ -1,6 +1,7 @@
 import ComposableArchitecture
 import LocalDate
 import Models
+import SharedUI
 import SwiftUI
 
 public struct TodayView: View {
@@ -16,7 +17,11 @@ public struct TodayView: View {
         NavigationStack(path: $store.scope(state: \.path, action: \.path)) {
             Group {
                 if let error = store.error {
-                    errorRetryView(error: error)
+                    ErrorView(
+                        error: Text(error),
+                        retry: { store.send(.retryButtonTapped) },
+                    )
+                    .padding()
                 } else if let picture = store.picture {
                     AstronomyPictureDetailView(picture: picture)
                 } else {
@@ -49,16 +54,6 @@ public struct TodayView: View {
                 AstronomyPictureListView(store: store)
             }
         }
-    }
-    
-    private func errorRetryView(error: TextState) -> some View {
-        Section(
-            header: ErrorRetryView(
-                error: error,
-                retry: { store.send(.retryButtonTapped) }
-            )
-            .textCase(nil)
-        ) {}
     }
 }
 

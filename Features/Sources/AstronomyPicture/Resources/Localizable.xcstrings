@@ -1,9 +1,6 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
-    "⛔" : {
-      "shouldTranslate" : false
-    },
     "Astronomy Pictures" : {
       "shouldTranslate" : false
     },
@@ -23,16 +20,6 @@
         }
       }
     },
-    "Retry" : {
-      "localizations" : {
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "再試行"
-          }
-        }
-      }
-    },
     "Today" : {
       "localizations" : {
         "ja" : {
@@ -43,7 +30,7 @@
         }
       }
     },
-    "Unexpected error occurred." : {
+    "Unexpected error occurred" : {
       "localizations" : {
         "ja" : {
           "stringUnit" : {
