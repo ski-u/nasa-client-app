@@ -17,69 +17,11 @@
 
 ## Common Commands
 
-### List Destinations
+Use `xcodebuild` for build, test, and dependency resolution. Always pass `-skipPackagePluginValidation -skipMacroValidation` to avoid plugin-related failures. Target `iPhone 17` simulator unless unavailable.
 
-```bash
-xcodebuild -project NASAClient.xcodeproj -scheme NASAClient -showdestinations
-```
-
-### List Targets and Schemes
-
-```bash
-xcodebuild -project NASAClient.xcodeproj -list
-```
-
-### Resolve Package Dependencies
-
-```bash
-xcodebuild -resolvePackageDependencies -project NASAClient.xcodeproj
-```
-
-### Build
-
-- Use feature/module scheme when possible (for example, `Models`)
-- Use `NASAClient` for full app verification
-
-```bash
-xcodebuild \
-  -project NASAClient.xcodeproj \
-  -scheme <SCHEME> \
-  -destination 'platform=iOS Simulator,name=iPhone 17' \
-  -skipPackagePluginValidation \
-  -skipMacroValidation \
-  build
-```
-
-### Test
-
-```bash
-xcodebuild \
-  -project NASAClient.xcodeproj \
-  -scheme <SCHEME> \
-  -destination 'platform=iOS Simulator,name=iPhone 17' \
-  -skipPackagePluginValidation \
-  -skipMacroValidation \
-  test
-```
-
-- For narrower validation, use `-only-testing`
-
-```bash
-xcodebuild \
-  -project NASAClient.xcodeproj \
-  -scheme <SCHEME> \
-  -destination 'platform=iOS Simulator,name=iPhone 17' \
-  -skipPackagePluginValidation \
-  -skipMacroValidation \
-  -only-testing:<TestTarget[/TestClass[/testMethod]]> \
-  test
-```
-
-### Format
-
-```bash
-swift format . --in-place --recursive --configuration .swift-format
-```
+- Build/test with the narrowest relevant scheme (e.g. `Models`, `AppFeature`); use `NASAClient` for full app verification.
+- For narrower test runs, use `-only-testing`.
+- Format: `swift format . --in-place --recursive --configuration .swift-format`
 
 ## Validation Guide
 
