@@ -36,27 +36,29 @@ public struct AstronomyPictureList: Sendable {
     
     private enum CancelID { case fetch }
     
-    public func reduce(into state: inout State, action: Action) -> Effect<Action> {
-        switch action {
-        case .onAppear:
-            if state.isLoaded {
+    public var body: some ReducerOf<Self> {
+        Reduce { state, action in
+            switch action {
+            case .onAppear:
+                if state.isLoaded {
+                    return .none
+                }
+                return fetchAstronomyPictures(state: &state)
+
+            case let .response(.success(pictures)):
+                state.isLoaded = true
+                state.isLoading = false
+                state.pictures = pictures
                 return .none
+
+            case let .response(.failure(error)):
+                state.error = .init(error.localizedDescription)
+                state.isLoading = false
+                return .none
+
+            case .retryButtonTapped:
+                return fetchAstronomyPictures(state: &state)
             }
-            return fetchAstronomyPictures(state: &state)
-
-        case let .response(.success(pictures)):
-            state.isLoaded = true
-            state.isLoading = false
-            state.pictures = pictures
-            return .none
-
-        case let .response(.failure(error)):
-            state.error = .init(error.localizedDescription)
-            state.isLoading = false
-            return .none
-
-        case .retryButtonTapped:
-            return fetchAstronomyPictures(state: &state)
         }
     }
     
